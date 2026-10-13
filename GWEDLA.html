@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gwedla Projects – Kitchen units, wardrobes, ceilings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#F2F4F1; --surface:#FFFFFF; --ink:#241A14; --muted:#645A52; --line:#D8DCD5;
+  --accent:#2F5D50; --accent-ink:#FFFFFF; --hero:#2A1D15; --hero-ink:#F3EEE6; --hero-muted:#CDBFAE;
+  --oak:#C99A5B; --focus:#B8741A; --err:#B3261E;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16120E; --surface:#211B15; --ink:#F1EBE2; --muted:#B3A89B; --line:#3A3027;
+    --accent:#74B5A0; --accent-ink:#0E211B; --hero:#0F0C09; --focus:#E8A54B; --err:#F2B8B5;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16120E; --surface:#211B15; --ink:#F1EBE2; --muted:#B3A89B; --line:#3A3027;
+  --accent:#74B5A0; --accent-ink:#0E211B; --hero:#0F0C09; --focus:#E8A54B; --err:#F2B8B5;
+}
+html{scroll-padding-top:calc(72px + env(safe-area-inset-top,0px));scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);line-height:1.08;margin:0;letter-spacing:-.02em}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:4px}
+.wrap{width:min(1160px,100% - 40px);margin-inline:auto}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--hero) 94%,transparent);backdrop-filter:blur(8px);color:var(--hero-ink)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.brand{font-family:var(--display);font-weight:800;font-size:1.25rem;letter-spacing:-.02em;text-decoration:none;display:flex;align-items:center;gap:10px}
+.brand svg{width:28px;height:28px}
+nav.main{display:flex;gap:22px;align-items:center}
+nav.main a{text-decoration:none;font-weight:500;font-size:.95rem;color:var(--hero-muted)}
+nav.main a:hover{color:var(--hero-ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 1rem var(--body);padding:13px 22px;border-radius:10px;border:2px solid transparent;cursor:pointer;text-decoration:none;transition:transform .15s,background .15s}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-primary:hover{filter:brightness(1.08)}
+.btn-light{background:var(--hero-ink);color:#2A1D15}
+.btn-ghost{border-color:currentColor;background:transparent}
+.btn-sm{padding:9px 16px;font-size:.92rem}
+@media (max-width:760px){nav.main a.hide-m{display:none}}
+
+/* hero */
+.hero{position:relative;background:var(--hero);color:var(--hero-ink);overflow:hidden;isolation:isolate}
+.hero .grain{position:absolute;inset:0;z-index:-1;opacity:.55}
+.hero .grain svg{width:100%;height:100%;display:block}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;padding:84px 0 92px}
+.hero h1{font-size:clamp(2.6rem,6.2vw,4.9rem);font-weight:800}
+.hero .lead{margin-top:22px;max-width:46ch;font-size:1.15rem;color:var(--hero-muted)}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero-tiles{display:grid;gap:14px}
+.tile{display:grid;grid-template-columns:130px 1fr;gap:16px;align-items:center;text-decoration:none;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:10px;transition:background .2s,transform .2s}
+.tile:hover{background:rgba(255,255,255,.13);transform:translateX(4px)}
+.tile .art{border-radius:8px;overflow:hidden}
+.tile b{font-family:var(--display);font-size:1.25rem;display:block}
+.tile span{color:var(--hero-muted);font-size:.93rem;line-height:1.4;display:block;margin-top:2px}
+.hero .wrap > div:first-child{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.hero-tiles{animation:rise .8s .12s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr;padding:56px 0 64px;gap:40px}}
+
+/* sections */
+section{padding:84px 0}
+.sec-head{max-width:640px;margin-bottom:34px}
+.sec-head h2{font-size:clamp(2rem,4.2vw,3rem)}
+.sec-head p{margin-top:12px;color:var(--muted);font-size:1.07rem}
+
+/* gallery */
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}
+.filters button{font:600 .98rem var(--body);padding:10px 18px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.filters button:hover{border-color:var(--accent)}
+.filters button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:24px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.card .art{border-bottom:1px solid var(--line)}
+.card .body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card h3{font-size:1.3rem}
+.card .desc{color:var(--muted);font-size:.97rem}
+.card .meta{font-size:.88rem;color:var(--muted);margin-top:auto;padding-top:6px}
+.card .btn{margin-top:8px;align-self:flex-start}
+.art{--wall:#E8E4DB;--floor:#CBC2B2;--oak:#C99A5B;--oakd:#A47536;--wal:#5B3B27;--white:#F6F4EE;--green:#2F5D50;--ln:rgba(40,28,20,.45);background:#E8E4DB;line-height:0}
+.art svg{width:100%;height:auto;display:block}
+
+/* process */
+.band{background:var(--surface);border-block:1px solid var(--line)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s;padding-top:18px;border-top:3px solid var(--accent)}
+.steps li::before{content:"Step " counter(s);font-weight:600;font-size:.9rem;color:var(--accent)}
+.steps h3{font-size:1.3rem;margin:6px 0 8px}
+.steps p{color:var(--muted)}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
+
+/* form */
+.quote{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:start}
+.quote .intro h2{font-size:clamp(2rem,4.2vw,3rem)}
+.quote .intro p{margin-top:14px;color:var(--muted)}
+.quote .intro ul{margin:22px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.quote .intro li{display:flex;gap:10px;align-items:flex-start}
+.quote .intro li svg{flex:none;width:22px;height:22px;margin-top:2px;color:var(--accent)}
+.formcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:30px}
+fieldset{border:0;padding:0;margin:0 0 22px}
+legend{font-weight:600;padding:0;margin-bottom:10px}
+label.f{display:block;font-weight:600;font-size:.95rem;margin-bottom:6px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+.field{margin-bottom:18px}
+.row .field{margin-bottom:0}
+input[type=text],input[type=tel],input[type=email],select,textarea{width:100%;font:inherit;font-size:1rem;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:12px 14px}
+textarea{min-height:120px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:var(--accent);outline:3px solid color-mix(in srgb,var(--accent) 30%,transparent);outline-offset:0}
+.hint{font-size:.85rem;color:var(--muted);margin-top:5px}
+.req{color:var(--err)}
+.chips{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;cursor:pointer;margin:0}
+.chip span{display:flex;align-items:center;gap:10px;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font-weight:600;background:var(--bg);transition:border-color .15s,background .15s}
+.chip span svg{width:26px;height:26px;flex:none;color:var(--accent)}
+.chip input:checked + span{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--bg))}
+.chip input:focus-visible + span{outline:3px solid var(--focus);outline-offset:2px}
+.err{color:var(--err);font-size:.88rem;margin-top:5px;min-height:0}
+.invalid{border-color:var(--err)!important}
+.result{display:none;background:var(--surface);border:2px solid var(--accent);border-radius:18px;padding:30px}
+.result.show{display:block;animation:rise .4s both}
+.result h3{font-size:1.6rem;margin-bottom:8px}
+.result pre{white-space:pre-wrap;font:inherit;font-size:.96rem;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:16px;margin:16px 0}
+.result .actions{display:flex;flex-wrap:wrap;gap:10px}
+@media (max-width:900px){.quote{grid-template-columns:1fr;gap:32px}}
+@media (max-width:520px){.row{grid-template-columns:1fr}.formcard{padding:22px}}
+
+/* footer */
+footer{background:var(--hero);color:var(--hero-ink);padding:52px 0 40px}
+footer .wrap{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:32px}
+footer h3{font-size:1.05rem;margin-bottom:10px}
+footer p,footer a{color:var(--hero-muted);font-size:.97rem}
+footer .small{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.14);padding-top:20px;font-size:.88rem}
+@media (max-width:760px){footer .wrap{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Oakline Carpentry home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="3" width="26" height="26" rx="4" fill="#C99A5B"/><path d="M3 12h26M3 20h26M12 3v9M20 12v8M12 20v9" stroke="#2A1D15" stroke-width="2" fill="none"/></svg>
+      Gwedla Projects
+    </a>
+    <nav class="main" aria-label="Main">
+      <a class="hide-m" href="#designs">Designs</a>
+      <a class="hide-m" href="#process">How it works</a>
+      <a class="btn btn-light btn-sm" href="#quote">Get a quote</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<div class="hero">
+  <div class="grain" aria-hidden="true">
+    <svg preserveAspectRatio="none">
+      <filter id="grain" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.004 0.28" numOctaves="3" seed="7"/>
+        <feColorMatrix type="matrix" values="0 0 0 0 0.79  0 0 0 0 0.60  0 0 0 0 0.36  0 0 0 1.5 -0.55"/>
+      </filter>
+      <rect width="100%" height="100%" filter="url(#grain)"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <div>
+      <h1>Made to measure. Built by hand.</h1>
+      <p class="lead">Custom kitchen units, fitted wardrobes and PVC ceilings, designed around your space and built to last. Browse our designs, then tell us about your job.</p>
+      <div class="cta">
+        <a class="btn btn-light" href="#designs">View our designs</a>
+        <a class="btn btn-ghost" href="#quote">Get a free quote</a>
+      </div>
+    </div>
+    <div class="hero-tiles" id="heroTiles"></div>
+  </div>
+</div>
+
+<section id="designs">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Designs you can ask for</h2>
+      <p>These are some of our most popular styles. Every job is adjusted to your room, your colours and your budget.</p>
+    </div>
+    <div class="filters" role="group" aria-label="Filter designs">
+      <button type="button" data-f="all" aria-pressed="true">All designs</button>
+      <button type="button" data-f="kitchen" aria-pressed="false">Kitchen units</button>
+      <button type="button" data-f="wardrobe" aria-pressed="false">Wardrobes</button>
+      <button type="button" data-f="ceiling" aria-pressed="false">Ceilings</button>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section id="process" class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>From first message to finished job</h2>
+    </div>
+    <ol class="steps">
+      <li><h3>Tell us what you need</h3><p>Fill in the form below with your contact details and the type of job. Add a design you like if you have one.</p></li>
+      <li><h3>We visit and measure</h3><p>We come to your home, measure up, talk through materials and give you a clear written quote.</p></li>
+      <li><h3>We build and fit</h3><p>Your pieces are made to size, installed neatly and the site is left clean.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="quote">
+  <div class="wrap quote">
+    <div class="intro">
+      <h2>Get a free quote</h2>
+      <p>Tell us who you are and what you want built. We reply to every request, usually within one working day.</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Free site visit and quote</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Kitchens, wardrobes, ceilings and any other woodwork</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Made to your measurements</li>
+      </ul>
+    </div>
+
+    <div>
+      <form class="formcard" id="quoteForm" novalidate>
+        <div class="row">
+          <div class="field">
+            <label class="f" for="name">Full name <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="name" name="name" autocomplete="name" required>
+            <div class="err" id="err-name" aria-live="polite"></div>
+          </div>
+          <div class="field">
+            <label class="f" for="phone">Phone / WhatsApp <span class="req" aria-hidden="true">*</span></label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" required>
+            <div class="err" id="err-phone" aria-live="polite"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label class="f" for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email">
+            <div class="err" id="err-email" aria-live="polite"></div>
+          </div>
+          <div class="field">
+            <label class="f" for="place">Suburb or town</label>
+            <input type="text" id="place" name="place" autocomplete="address-level2">
+          </div>
+        </div>
+
+        <fieldset>
+          <legend>What type of job is it? <span class="req" aria-hidden="true">*</span></legend>
+          <div class="chips" id="jobChips">
+            <label class="chip"><input type="radio" name="job" value="Kitchen units"><span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="6" rx="1"/><rect x="3" y="13" width="18" height="8" rx="1"/><path d="M12 13v8"/></svg>Kitchen units</span></label>
+            <label class="chip"><input type="radio" name="job" value="Wardrobes"><span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="1"/><path d="M12 2v20M9.5 11v2M14.5 11v2"/></svg>Wardrobes</span></label>
+            <label class="chip"><input type="radio" name="job" value="Ceiling"><span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 5h20M2 5l5 7h10l5-7M7 12v7h10v-7M12 5v7"/></svg>Ceiling</span></label>
+            <label class="chip"><input type="radio" name="job" value="Other woodwork"><span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 20 17 6l3 3L6 23zM14 9l3 3M16 4l4 4"/></svg>Other woodwork</span></label>
+          </div>
+          <div class="err" id="err-job" aria-live="polite"></div>
+        </fieldset>
+
+        <div class="field">
+          <label class="f" for="design">Design you like</label>
+          <select id="design" name="design"><option value="">Not sure yet / something custom</option></select>
+        </div>
+
+        <div class="field">
+          <label class="f" for="details">Tell us about the job</label>
+          <textarea id="details" name="details" placeholder="Room size, materials or colours you like, anything we should know."></textarea>
+        </div>
+
+        <div class="field">
+          <label class="f" for="when">When do you want it done?</label>
+          <select id="when" name="when">
+            <option value="">No fixed date</option>
+            <option>As soon as possible</option>
+            <option>Within 1 month</option>
+            <option>In 1 to 3 months</option>
+            <option>Just planning for now</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%">Send my request</button>
+        <p class="hint" style="margin-top:10px">After you press send, you choose to deliver the request by WhatsApp or email so it reaches us directly.</p>
+      </form>
+
+      <div class="result" id="result" role="status" tabindex="-1">
+        <h3>Almost done. Send it to us.</h3>
+        <p>Your request is ready. Choose how you want to send it:</p>
+        <pre id="summary"></pre>
+        <div class="actions">
+          <a class="btn btn-primary" id="waLink" target="_blank" rel="noopener">Send on WhatsApp</a>
+          <a class="btn btn-ghost" id="mailLink">Send by email</a>
+          <button type="button" class="btn btn-ghost" id="copyBtn">Copy message</button>
+          <button type="button" class="btn btn-ghost" id="editBtn">Edit details</button>
+        </div>
+        <div class="hint" id="copyNote" aria-live="polite" style="margin-top:12px"></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <h3>Gwedla Projects</h3>
+      <p>Custom kitchens, wardrobes, ceilings and woodwork. Designed, built and fitted by our own team.</p>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <p id="fPhone"></p>
+      <p><a id="fMail" href="#"></a></p>
+    </div>
+    <div>
+      <h3>Opening hours</h3>
+      <p>Mon–Fri: 07:30–17:00</p>
+      <p>Sat: 08:00–13:00</p>
+    </div>
+    <p class="small">© <span id="yr"></span> Gwedla Projects. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+
+const BUSINESS = {
+  name: "Gwedla Projects",
+  whatsapp: "082 473 4214 ",          // international format, digits only (e.g. 27821234567)
+  phoneDisplay: "+27 83 525 8260",
+  email: "zmlungisi@gmail.com"
+};
+
+/* ===== Illustration helpers ===== */
+const R=(x,y,w,h,f,s='none',sw=1,rx=0)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${f}" stroke="${s}" stroke-width="${sw}" rx="${rx}"/>`;
+const L=(x1,y1,x2,y2,c='var(--ln)',w=1)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="${w}" stroke-linecap="round"/>`;
+const C=(x,y,r,f)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${f}"/>`;
+const POLY=(pts,f,s='none',sw=1)=>`<polygon points="${pts.map(p=>p.join(',')).join(' ')}" fill="${f}" stroke="${s}" stroke-width="${sw}" stroke-linejoin="round"/>`;
+const SVG=(label,body)=>`<svg viewBox="0 0 400 300" role="img" aria-label="${label}">${body}</svg>`;
+const ROOM=()=>R(0,0,400,300,'var(--wall)')+R(0,262,400,38,'var(--floor)');
+
+function kitchenShaker(){
+  let s=ROOM();
+  s+=R(150,50,100,80,'#D5E6EC','var(--ln)',1.5)+L(200,50,200,130)+L(150,90,250,90);
+  for(const x0 of [20,260]) for(let i=0;i<3;i++){const x=x0+i*40;
+    s+=R(x,36,40,96,'var(--white)','var(--ln)')+R(x+6,42,28,84,'none','var(--ln)')+C(x+(i===2?8:32),122,2,'var(--wal)');}
+  for(let i=0;i<6;i++){const x=10+i*63.33;
+    s+=R(x,200,63.3,62,'var(--green)','var(--ln)')+R(x+8,208,47,46,'none','rgba(255,255,255,.45)')+C(x+31.6,212,2.3,'#E9D9A8');}
+  s+=R(4,190,392,11,'var(--wal)')+R(10,260,380,5,'#2A1D15');
+  s+=`<path d="M196 190v-24q0-8 8-8h10" stroke="#8d8d8d" stroke-width="3" fill="none"/>`+R(186,186,28,4,'#B8B8B8');
+  return SVG('Painted shaker style kitchen with green base units and white wall units',s);
+}
+function kitchenIsland(){
+  let s=ROOM();
+  s+=R(20,28,62,222,'var(--oak)','var(--ln)')+R(26,36,50,62,'#2A2522','var(--ln)')+R(30,42,42,40,'#463F3A')+L(26,110,76,110)+L(26,176,76,176);
+  s+=R(82,40,298,10,'var(--oakd)')+R(100,56,160,60,'#D5E6EC','var(--ln)',1.5);
+  s+=R(82,172,298,70,'var(--wal)','var(--ln)')+R(82,164,298,9,'var(--white)','var(--ln)');
+  for(let i=0;i<3;i++)s+=L(82,195+i*0,380,195)+L(82,218,380,218);
+  s+=R(106,198,244,52,'var(--oak)','var(--ln)')+R(100,190,256,9,'var(--white)','var(--ln)');
+  s+=L(106,216,350,216)+L(106,233,350,233);
+  for(const x of [150,228,306]) s+=`<ellipse cx="${x}" cy="274" rx="17" ry="6" fill="var(--wal)"/>`+L(x-9,277,x-11,298,'var(--wal)',3)+L(x+9,277,x+11,298,'var(--wal)',3);
+  return SVG('Modern handleless kitchen with an island and stools',s);
+}
+function kitchenOpen(){
+  let s=ROOM();
+  s+=R(20,30,82,220,'var(--white)','var(--ln)')+R(26,38,70,100,'none','var(--ln)')+R(26,146,70,98,'none','var(--ln)')+L(88,130,88,150,'var(--wal)',3);
+  s+=R(120,70,250,7,'var(--oak)','var(--ln)')+R(120,128,250,7,'var(--oak)','var(--ln)');
+  [[132,26,'#7aa59a'],[162,18,'#d9c9a6'],[190,22,'var(--wal)'],[300,24,'#c98a5f'],[332,18,'#7aa59a']].forEach(([x,h,f])=>{s+=R(x,70-h,20,h,f,'var(--ln)',.8,3);});
+  s+=`<ellipse cx="240" cy="66" rx="24" ry="4" fill="#E8E8E8" stroke="var(--ln)"/>`;
+  [[134,22,'#D8B07A'],[170,30,'#9C6B3F'],[310,26,'#E9E4D8'],[342,18,'#7aa59a']].forEach(([x,h,f])=>{s+=R(x,128-h,24,h,f,'var(--ln)',.8,2);});
+  s+=R(102,188,288,74,'var(--oak)','var(--ln)')+R(96,180,298,9,'var(--wal)');
+  for(let i=0;i<4;i++){const x=106+i*70;s+=R(x,194,64,62,'none','rgba(0,0,0,.3)')+L(x+26,200,x+38,200,'#2A1D15',3);}
+  return SVG('Kitchen with open timber shelves and a tall pantry unit',s);
+}
+function wardrobeSliding(){
+  let s=ROOM();
+  s+=R(36,22,328,244,'var(--wal)')+R(36,22,328,10,'#2A1D15');
+  s+=R(42,34,112,228,'var(--oak)','var(--ln)');
+  s+=R(150,34,102,228,'#CFE0E6','var(--ln)');
+  s+=POLY([[170,262],[200,34],[214,34],[184,262]],'rgba(255,255,255,.55)')+POLY([[205,262],[225,34],[231,34],[211,262]],'rgba(255,255,255,.45)');
+  s+=R(248,34,112,228,'var(--oak)','var(--ln)');
+  for(let i=0;i<5;i++){s+=L(58+i*20,44,58+i*20,252,'rgba(91,59,39,.35)')+L(264+i*20,44,264+i*20,252,'rgba(91,59,39,.35)');}
+  s+=R(143,130,5,40,'#2A1D15','none',1,2)+R(252,130,5,40,'#2A1D15','none',1,2);
+  s+=R(36,262,328,5,'#2A1D15');
+  return SVG('Fitted sliding door wardrobe with a mirror panel',s);
+}
+function wardrobeWalkIn(){
+  let s=ROOM()+R(20,18,360,246,'#DDD6C8','var(--ln)');
+  const cols=['#2F5D50','#C99A5B','#7A8FA6','#B6523A','#E9E4D8','#4B4B52'];
+  s+=R(30,30,160,5,'var(--oak)')+[0,1,2,3].map(i=>R(38+i*38,12+18,26,18,cols[(i+2)%6],'var(--ln)',.8,2)).join('');
+  s+=L(30,62,190,62,'var(--wal)',3);
+  for(let i=0;i<9;i++){const x=36+i*17;s+=`<path d="M${x+6} 62l-5 5h10z" fill="none" stroke="var(--wal)"/>`+R(x,67,12,44,cols[i%6],'var(--ln)',.8,2);}
+  s+=L(30,142,190,142,'var(--wal)',3);
+  for(let i=0;i<9;i++){const x=36+i*17;s+=R(x,147,12,32,cols[(i+3)%6],'var(--ln)',.8,2);}
+  s+=R(30,214,160,5,'var(--oak)');
+  for(let i=0;i<5;i++)s+=R(38+i*30,200,22,14,cols[i%6],'var(--ln)',.8,3);
+  s+=R(196,18,6,246,'var(--oakd)');
+  for(const y of [70,104,138]){s+=R(212,y,160,5,'var(--oak)');for(let i=0;i<4;i++)s+=`<ellipse cx="${232+i*38}" cy="${y-6}" rx="14" ry="5" fill="${cols[(i+y)%6]}" stroke="var(--ln)" stroke-width=".8"/>`;}
+  for(let i=0;i<3;i++){const y=166+i*32;s+=R(212,y,160,30,'var(--oak)','var(--ln)')+R(278,y+12,28,4,'#2A1D15','none',1,2);}
+  return SVG('Walk-in wardrobe with hanging rails, shelves and drawers',s);
+}
+function wardrobeHinged(){
+  let s=ROOM();
+  s+=R(36,22,328,246,'var(--wal)');
+  s+=R(200,30,80,232,'#3A271B');
+  for(const y of [78,126,174,222])s+=R(200,y,80,4,'var(--oakd)');
+  [[206,60,'#E9E4D8'],[240,52,'#2F5D50'],[206,108,'#C99A5B'],[240,100,'#7A8FA6'],[206,156,'#B6523A'],[240,148,'#E9E4D8'],[206,204,'#2F5D50'],[240,196,'#C99A5B']].forEach(([x,y,f])=>{s+=R(x,y,30,18,f,'var(--ln)',.8,2);});
+  for(const x of [40,120,282]){s+=R(x,30,78,232,'var(--oak)','var(--ln)')+R(x+8,40,62,212,'none','rgba(91,59,39,.45)')+R(x+(x===120?66:6),128,4,44,'#2A1D15','none',1,2);}
+  s+=POLY([[200,30],[166,40],[166,252],[200,262]],'var(--oakd)','var(--ln)')+R(169,130,3,40,'#2A1D15');
+  return SVG('Built-in hinged door wardrobe with one door open showing shelves',s);
+}
+
+/* Ceilings seen from below in one-point perspective */
+function ceilingRoom(kind){
+  const P=(t,s)=>{const l=20+110*s,r=380-110*s;return [l+(r-l)*t,10+80*s];};
+  let s=R(0,0,400,300,'#D8D2C5')+POLY([[20,290],[380,290],[270,170],[130,170]],'var(--floor)')+R(130,90,140,80,'var(--wall)','var(--ln)');
+  s+=R(180,112,40,58,'#8a6a4a','var(--ln)')+C(212,142,2,'#E9D9A8');
+  s+=POLY([[0,0],[20,10],[130,90],[130,170],[20,290],[0,300]],'#CFC8BA')+POLY([[400,0],[380,10],[270,90],[270,170],[380,290],[400,300]],'#CFC8BA');
+  if(kind==='coffer'){
+    const ss=[0,.28,.52,.72,.88,1],N=6;
+    s+=POLY([P(0,0),P(1,0),P(1,1),P(0,1)],'var(--wal)');
+    for(let a=0;a<N;a++)for(let b=0;b<ss.length-1;b++){
+      const g=.04,t0=a/N+g/N*0.3,t1=(a+1)/N-g/N*0.3,s0=ss[b]+(b?0.012:0.014),s1=ss[b+1]-0.012;
+      s+=POLY([P(t0,s0),P(t1,s0),P(t1,s1),P(t0,s1)],(a+b)%2?'var(--oak)':'#D4A868','var(--wal)',1.5);
+    }
+    const c=P(.5,.5);s+=L(c[0],c[1],c[0],c[1]+22,'#2A1D15',1.5)+`<ellipse cx="${c[0]}" cy="${c[1]+25}" rx="13" ry="5" fill="#F6E7B4" stroke="#2A1D15"/>`;
+    return SVG('Timber coffered ceiling with beams and recessed panels',s);
+  }
+  if(kind==='slat'){
+    const N=14;
+    s+=POLY([P(0,0),P(1,0),P(1,1),P(0,1)],'#2A1D15');
+    for(let i=0;i<N;i++){s+=POLY([P((i+.1)/N,0),P((i+.9)/N,0),P((i+.9)/N,1),P((i+.1)/N,1)],i%2?'var(--oak)':'var(--oakd)');}
+    const a=P(.5,0),b=P(.5,1);
+    s+=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="#FFF2C2" stroke-width="5" opacity=".35"/>`+L(a[0],a[1],b[0],b[1],'#FFF2C2',2);
+    return SVG('Timber slat ceiling with a central strip of LED light',s);
+  }
+  s+=POLY([P(0,0),P(1,0),P(1,1),P(0,1)],'var(--white)','var(--ln)');
+  const tray=[P(.1,.14),P(.9,.14),P(.9,.86),P(.1,.86)];
+  s+=POLY(tray,'none','#F6C453',9).replace('stroke-width="9"','stroke-width="9" opacity=".35"')+POLY(tray,'#FBF7EE','#F6C453',2.5);
+  for(const [t,y] of [[.28,.34],[.5,.34],[.72,.34],[.28,.66],[.5,.66],[.72,.66]]){const p=P(t,y);s+=`<ellipse cx="${p[0]}" cy="${p[1]}" rx="${7-y*3}" ry="${2.6}" fill="#FFF6D2" stroke="var(--ln)" stroke-width=".8"/>`;}
+  return SVG('Gypsum drop ceiling with a lit cove and spotlights',s);
+}
+
+const DESIGNS=[
+  {id:'k1',cat:'kitchen',title:'Shaker kitchen',desc:'Classic framed doors, painted green base units with white wall units and a hardwood worktop.',meta:'Painted MDF or solid timber',art:kitchenShaker},
+  {id:'k2',cat:'kitchen',title:'Handleless island kitchen',desc:'Clean lines, push-open drawers, a tall oven housing and an island with seating.',meta:'Oak veneer and white laminate',art:kitchenIsland},
+  {id:'k3',cat:'kitchen',title:'Open shelf kitchen',desc:'Floating timber shelves for everyday dishes, plus a full-height pantry unit for storage.',meta:'Solid timber shelves',art:kitchenOpen},
+  {id:'w1',cat:'wardrobe',title:'Sliding door wardrobe',desc:'Wall-to-wall doors that save floor space, with a full-length mirror panel.',meta:'Soft-close sliding system',art:wardrobeSliding},
+  {id:'w2',cat:'wardrobe',title:'Walk-in wardrobe',desc:'Hanging rails, shelves, shoe racks and drawers laid out to suit how you dress.',meta:'Open or doored',art:wardrobeWalkIn},
+  {id:'w3',cat:'wardrobe',title:'Hinged door wardrobe',desc:'Panelled doors on soft-close hinges with adjustable shelves and hanging space inside.',meta:'Built-in, floor to ceiling',art:wardrobeHinged},
+  {id:'c1',cat:'ceiling',title:'Coffered timber ceiling',desc:'A grid of beams and recessed panels that adds depth to a lounge or dining room.',meta:'Solid or veneered timber',art:()=>ceilingRoom('coffer')},
+  {id:'c2',cat:'ceiling',title:'Slat ceiling',desc:'Warm timber slats with a hidden LED strip. Works well in passages and living areas.',meta:'Timber slats with LED lighting',art:()=>ceilingRoom('slat')},
+  {id:'c3',cat:'ceiling',title:'Cove lit drop ceiling',desc:'A stepped ceiling with concealed cove lighting and recessed spotlights.',meta:'Board and timber framing',art:()=>ceilingRoom('cove')}
+];
+const JOB_FOR={kitchen:'Kitchen units',wardrobe:'Wardrobes',ceiling:'Ceiling'};
+
+/* ===== Render ===== */
+const grid=document.getElementById('grid'), design=document.getElementById('design');
+function renderGrid(f){
+  grid.innerHTML='';
+  DESIGNS.filter(d=>f==='all'||d.cat===f).forEach(d=>{
+    const el=document.createElement('article');el.className='card';
+    el.innerHTML=`<div class="art">${d.art()}</div><div class="body"><h3>${d.title}</h3><p class="desc">${d.desc}</p><p class="meta">${d.meta}</p><button type="button" class="btn btn-primary btn-sm" data-req="${d.id}">Ask for this design</button></div>`;
+    grid.appendChild(el);
+  });
+}
+DESIGNS.forEach(d=>{const o=document.createElement('option');o.value=d.title;o.textContent=d.title;design.appendChild(o);});
+renderGrid('all');
+
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.filters button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  renderGrid(b.dataset.f);
+}));
+
+const tiles=document.getElementById('heroTiles');
+[['kitchen','Kitchen units','Fitted units for every budget and style',DESIGNS[0]],['wardrobe','Wardrobes','Sliding, hinged and walk-in',DESIGNS[3]],['ceiling','Ceilings','Timber, slat and cove-lit designs',DESIGNS[6]]].forEach(([f,t,s,d])=>{
+  const a=document.createElement('a');a.className='tile';a.href='#designs';
+  a.innerHTML=`<div class="art">${d.art()}</div><div><b>${t}</b><span>${s}</span></div>`;
+  a.addEventListener('click',()=>{document.querySelectorAll('.filters button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.f===f));renderGrid(f);});
+  tiles.appendChild(a);
+});
+
+grid.addEventListener('click',e=>{
+  const b=e.target.closest('[data-req]');if(!b)return;
+  const d=DESIGNS.find(x=>x.id===b.dataset.req);
+  document.querySelector(`input[name=job][value="${JOB_FOR[d.cat]}"]`).checked=true;
+  design.value=d.title;
+  clearErr('job');
+  document.getElementById('quote').scrollIntoView();
+  setTimeout(()=>document.getElementById('name').focus({preventScroll:true}),400);
+});
+
+/* ===== Form ===== */
+const form=document.getElementById('quoteForm'), result=document.getElementById('result');
+function setErr(k,msg){const e=document.getElementById('err-'+k);e.textContent=msg;const i=document.getElementById(k);if(i)i.classList.add('invalid');}
+function clearErr(k){const e=document.getElementById('err-'+k);if(e)e.textContent='';const i=document.getElementById(k);if(i)i.classList.remove('invalid');}
+['name','phone','email'].forEach(k=>document.getElementById(k).addEventListener('input',()=>clearErr(k)));
+document.querySelectorAll('input[name=job]').forEach(r=>r.addEventListener('change',()=>clearErr('job')));
+
+form.addEventListener('submit',e=>{
+  e.preventDefault();
+  const v=n=>form.elements[n].value.trim();
+  let bad=null;
+  ['name','phone','email','job'].forEach(clearErr);
+  if(!v('name')){setErr('name','Enter your name.');bad=bad||'name';}
+  if(v('phone').replace(/\D/g,'').length<7){setErr('phone','Enter a phone number we can reach you on.');bad=bad||'phone';}
+  if(v('email')&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v('email'))){setErr('email','Check the email address.');bad=bad||'email';}
+  const job=(form.querySelector('input[name=job]:checked')||{}).value;
+  if(!job){setErr('job','Choose the type of job.');bad=bad||'jobChips';}
+  if(bad){const t=document.getElementById(bad);if(t)t.scrollIntoView({block:'center'});if(bad!=='jobChips')t.focus();return;}
+
+  const lines=[`New quote request for ${BUSINESS.name}`,'',`Name: ${v('name')}`,`Phone: ${v('phone')}`];
+  if(v('email'))lines.push(`Email: ${v('email')}`);
+  if(v('place'))lines.push(`Location: ${v('place')}`);
+  lines.push(`Job type: ${job}`);
+  if(v('design'))lines.push(`Design: ${v('design')}`);
+  if(v('when'))lines.push(`Timing: ${v('when')}`);
+  if(v('details'))lines.push('',`Details: ${v('details')}`);
+  const msg=lines.join('\n');
+  document.getElementById('summary').textContent=msg;
+  document.getElementById('waLink').href=`https://wa.me/${BUSINESS.whatsapp}?text=${encodeURIComponent(msg)}`;
+  document.getElementById('mailLink').href=`mailto:${BUSINESS.email}?subject=${encodeURIComponent('Quote request: '+job)}&body=${encodeURIComponent(msg)}`;
+  form.style.display='none';result.classList.add('show');result.scrollIntoView({block:'center'});result.focus({preventScroll:true});
+});
+document.getElementById('editBtn').addEventListener('click',()=>{result.classList.remove('show');form.style.display='';form.scrollIntoView({block:'start'});});
+document.getElementById('copyBtn').addEventListener('click',async()=>{
+  const note=document.getElementById('copyNote'),t=document.getElementById('summary').textContent;
+  try{await navigator.clipboard.writeText(t);note.textContent='Message copied.';}
+  catch(_){const r=document.createRange();r.selectNodeContents(document.getElementById('summary'));const s=getSelection();s.removeAllRanges();s.addRange(r);note.textContent='Select and copy the message above.';}
+});
+
+document.getElementById('fPhone').textContent=BUSINESS.phoneDisplay;
+const fm=document.getElementById('fMail');fm.textContent=BUSINESS.email;fm.href='mailto:'+BUSINESS.email;
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
